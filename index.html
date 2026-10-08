@@ -30,7 +30,8 @@
         margin-top: 0;
       }
 
-      .eyebrow, .chart-note {
+      .eyebrow,
+      .chart-note {
         color: #526170;
         font-size: 0.875rem;
       }
@@ -76,7 +77,8 @@
         color: #2456a6;
       }
 
-      button:focus-visible, a:focus-visible {
+      button:focus-visible,
+      a:focus-visible {
         outline: 3px solid #2456a6;
         outline-offset: 4px;
       }
@@ -102,15 +104,21 @@
     <main class="card">
       <p class="eyebrow">D3 + React · Learning journal</p>
       <h1>Small data, clear stories.</h1>
-      <p id="message">Exploring data visualization in Yan Holtz’s D3 + React course.</p>
+      <p id="message">
+        Exploring data visualization in Yan Holtz’s D3 + React course.
+      </p>
 
       <button id="change-message">Click me</button>
 
       <figure aria-labelledby="bar-chart-heading">
         <h2 id="bar-chart-heading">D has the highest value</h2>
-        <p class="chart-subtitle">Compare values across four categories. D reaches 10; A reaches 1.</p>
+        <p class="chart-subtitle">
+          Compare values across four categories. D reaches 10; A reaches 1.
+        </p>
         <div id="bar-chart"></div>
-        <figcaption class="chart-note">Source: course example data · Values have no specified unit.</figcaption>
+        <figcaption class="chart-note">
+          Source: course example data · Values have no specified unit.
+        </figcaption>
       </figure>
 
       <h2>What I'm learning</h2>
@@ -141,86 +149,100 @@
         { name: "A", value: 1 },
         { name: "B", value: 5 },
         { name: "C", value: 8 },
-        { name: "D", value: 10 }
+        { name: "D", value: 10 },
       ];
 
       const width = 600;
       const height = 360;
       const margin = { top: 40, right: 20, bottom: 40, left: 40 };
 
-      const x = d3.scaleBand()
-        .domain(data.map(d => d.name))
+      const x = d3
+        .scaleBand()
+        .domain(data.map((d) => d.name))
         .range([margin.left, width - margin.right])
         .padding(0.25);
 
-      const y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.value)])
+      const y = d3
+        .scaleLinear()
+        .domain([0, d3.max(data, (d) => d.value)])
         .nice()
         .range([height - margin.bottom, margin.top]);
 
-      const svg = d3.select("#bar-chart")
+      const svg = d3
+        .select("#bar-chart")
         .append("svg")
         .attr("viewBox", `0 0 ${width} ${height}`)
         .attr("role", "img")
         .attr("aria-labelledby", "chart-title chart-description");
 
-      svg.append("title")
-        .attr("id", "chart-title")
-        .text("Values by category");
-      svg.append("desc")
+      svg.append("title").attr("id", "chart-title").text("Values by category");
+      svg
+        .append("desc")
         .attr("id", "chart-description")
-        .text("Bar chart: A has value 1, B has value 5, C has value 8, and D has value 10.");
+        .text(
+          "Bar chart: A has value 1, B has value 5, C has value 8, and D has value 10.",
+        );
 
       // Light gridlines support comparisons without competing with the bars.
-      svg.append("g")
+      svg
+        .append("g")
         .selectAll("line")
-        .data(y.ticks(5).filter(value => value !== 0))
+        .data(y.ticks(5).filter((value) => value !== 0))
         .join("line")
         .attr("x1", margin.left)
         .attr("x2", width - margin.right)
-        .attr("y1", value => y(value))
-        .attr("y2", value => y(value))
+        .attr("y1", (value) => y(value))
+        .attr("y2", (value) => y(value))
         .attr("stroke", "#e2e8f0");
 
-      svg.append("text")
+      svg
+        .append("text")
         .attr("x", margin.left)
         .attr("y", 15)
         .attr("fill", "#526170")
         .attr("font-size", 13)
         .text("Value");
 
-      svg.append("g")
+      svg
+        .append("g")
         .selectAll("rect")
         .data(data)
         .join("rect")
-        .attr("x", d => x(d.name))
-        .attr("y", d => y(d.value))
+        .attr("x", (d) => x(d.name))
+        .attr("y", (d) => y(d.value))
         .attr("width", x.bandwidth())
-        .attr("height", d => y(0) - y(d.value))
+        .attr("height", (d) => y(0) - y(d.value))
         // Highlight the category named in the headline.
-        .attr("fill", d => d.name === "D" ? "#2456a6" : "#8496ab");
+        .attr("fill", (d) => (d.name === "D" ? "#2456a6" : "#8496ab"));
 
-      svg.append("g")
+      svg
+        .append("g")
         .attr("fill", "#263238")
         .attr("text-anchor", "middle")
         .selectAll("text")
         .data(data)
         .join("text")
         .attr("class", "value-label")
-        .attr("x", d => x(d.name) + x.bandwidth() / 2)
-        .attr("y", d => y(d.value) - 8)
-        .text(d => d.value);
+        .attr("x", (d) => x(d.name) + x.bandwidth() / 2)
+        .attr("y", (d) => y(d.value) - 8)
+        .text((d) => d.value);
 
-      svg.append("g")
+      svg
+        .append("g")
         .attr("class", "axis")
         .attr("transform", `translate(0,${height - margin.bottom})`)
         .call(d3.axisBottom(x).tickSize(0).tickPadding(10));
 
-      svg.append("g")
+      svg
+        .append("g")
         .attr("class", "axis")
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(y).ticks(5).tickSize(0).tickPadding(8))
-        .call(g => g.select(".domain").remove());
+        .call((g) => g.select(".domain").remove());
+    </script>
+
+    <script>
+      console.log("Hello!!!");
     </script>
   </body>
 </html>
