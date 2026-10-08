@@ -2,17 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My First Course Page</title>
+
     <style>
       body {
         font-family: Arial, sans-serif;
         margin: 40px;
         background-color: #f4f7fb;
+        color: #263238;
       }
 
-      h1 {
-        color: #2456a6;
-      }
       .card {
         max-width: 600px;
         margin: 40px auto;
@@ -21,19 +21,46 @@
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
+
+      h1 {
+        color: #2456a6;
+      }
+
+      button {
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        background-color: #2456a6;
+        color: white;
+        cursor: pointer;
+      }
     </style>
   </head>
-  <body>
-    <h1>Hello, D3 + React!</h1>
-    <p>This is my first page in the course repository.</p>
 
-    <h2>What I'm learning</h2>
-    <ul>
-      <li>HTML structures a webpage</li>
-      <li>CSS styles the page</li>
-      <li>JavaScript adds interactivity</li>
-      <li>D3.js creates data-driven visualizations</li>
-      <li>React builds user interfaces</li>
-    </ul>
+  <body>
+    <main class="card">
+      <h1>Hello, D3 + React!</h1>
+      <p id="message">This is my first page in the course repository.</p>
+
+      <button id="change-message">Click me</button>
+
+      <h2>What I'm learning</h2>
+      <ul>
+        <li>HTML structures a webpage</li>
+        <li>CSS styles the page</li>
+        <li>JavaScript adds interactivity</li>
+        <li>D3.js creates data-driven visualizations</li>
+        <li>React builds user interfaces</li>
+      </ul>
+    </main>
+
+    <script>
+      document
+        .querySelector("#change-message")
+        .addEventListener("click", () => {
+          document.querySelector("#message").textContent =
+            "You clicked the button!";
+        });
+    </script>
   </body>
 </html>
